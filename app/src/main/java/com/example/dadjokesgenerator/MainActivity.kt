@@ -9,17 +9,21 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.dadjokesgenerator.di.initKoin
 import com.example.dadjokesgenerator.screen.main.MainScreen
+import com.example.dadjokesgenerator.screen.main.MainScreenContent
 import com.example.dadjokesgenerator.ui.theme.DadJokesGeneratorTheme
+import org.koin.core.component.KoinComponent
 
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        initKoin()
         setContent {
             DadJokesGeneratorTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    MainScreen()
+                    MainScreenContent()
                 }
             }
         }
@@ -30,6 +34,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainContentPreview() {
     DadJokesGeneratorTheme {
-        MainScreen()
+        MainScreen(joke = "Hello", onNextClicked = {})
     }
 }
